@@ -4,6 +4,16 @@ import java.time.LocalTime;
 
 public class TimeUtil {
     public static boolean isBetweenHalfOpen(LocalTime lt, LocalTime startTime, LocalTime endTime) {
-        return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) < 0;
+        boolean result;
+        if (startTime != null && endTime != null) {
+            result = lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) < 0;
+        } else if (startTime == null && endTime != null) {
+            result =  lt.compareTo(endTime) < 0;
+        } else if (startTime != null && endTime == null) {
+            result = lt.compareTo(startTime) >= 0;
+        } else {
+            result = true;
+        }
+        return result;
     }
 }
