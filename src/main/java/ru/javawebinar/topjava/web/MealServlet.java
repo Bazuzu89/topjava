@@ -33,4 +33,19 @@ public class MealServlet extends HttpServlet {
         request.setAttribute("meals", meals);
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("delete meal");
+        int id = Integer.valueOf(request.getParameter("id"));
+        repository.delete(id);
+        List<MealTo> meals = MealsUtil.filteredByStreams(repository.getAll(), null, null, MealsUtil.getCaloriesPerDay());
+        request.setAttribute("meals", meals);
+        request.getRequestDispatcher("/meals.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //TODO update meal logic
+    }
 }
