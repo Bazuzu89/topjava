@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.web;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.DAO.MealEmbeddedRepository;
@@ -45,7 +46,15 @@ public class MealServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //TODO update meal logic
+        ObjectMapper mapper = new ObjectMapper();
+        MealTo mealTo = mapper.readValue(request.getInputStream(), MealTo.class);
+        Meal meal = MealsUtil.createEntity(mealTo);
+        if (repository.getById(meal.getId()) != null) {
+            repository.update(meal);
+        } else {
+            repository.create(meal);
+        }
     }
 }

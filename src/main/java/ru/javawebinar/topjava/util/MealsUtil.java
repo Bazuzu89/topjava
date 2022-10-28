@@ -53,4 +53,9 @@ public class MealsUtil {
     public static int getCaloriesPerDay() {
         return caloriesPerDay;
     }
+
+    public static Meal createEntity(MealTo mealTo) {
+        //TODO unwrap mealTo to meal logic
+        return null;
+    }
 }
