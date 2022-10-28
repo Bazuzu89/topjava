@@ -42,7 +42,12 @@ public class MealsUtil {
     }
 
     private static MealTo createTo(Meal meal, boolean excess) {
-        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        MealTo mealTo = new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        int id = meal.getId();
+        if (id > 0 ) {
+            mealTo.setId(id);
+        }
+        return mealTo;
     }
 
     public static int getCaloriesPerDay() {
