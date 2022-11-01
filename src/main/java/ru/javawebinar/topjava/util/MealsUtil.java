@@ -42,10 +42,24 @@ public class MealsUtil {
     }
 
     private static MealTo createTo(Meal meal, boolean excess) {
-        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        MealTo mealTo = new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        int id = meal.getId();
+        if (id > 0 ) {
+            mealTo.setId(id);
+        }
+        return mealTo;
     }
 
     public static int getCaloriesPerDay() {
         return caloriesPerDay;
+    }
+
+    public static Meal createEntity(MealTo mealTo) {
+        Meal meal = new Meal();
+        meal.setId(mealTo.getId());
+        meal.setDescription(mealTo.getDescription());
+        meal.setCalories(mealTo.getCalories());
+        meal.setDateTime(mealTo.getDateTime());
+        return meal;
     }
 }

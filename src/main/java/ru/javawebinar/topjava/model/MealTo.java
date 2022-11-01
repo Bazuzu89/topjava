@@ -4,13 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MealTo {
-    private final LocalDateTime dateTime;
 
-    private final String description;
 
-    private final int calories;
+    private LocalDateTime dateTime;
 
-    private final boolean excess;
+    private String description;
+
+    private int calories;
+
+
+
+    private int id;
+
+    private boolean excess;
 
     public MealTo(LocalDateTime dateTime, String description, int calories, boolean excess) {
         this.dateTime = dateTime;
@@ -19,14 +25,27 @@ public class MealTo {
         this.excess = excess;
     }
 
+    public MealTo() {
+
+    }
+
     @Override
     public String toString() {
         return "MealTo{" +
-                "dateTime=" + dateTime +
+                "id=" + id +
+                ", dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
                 ", excess=" + excess +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDateTime() {
@@ -34,13 +53,29 @@ public class MealTo {
         return dateTimeString;
     }
 
+    public void setDateTime(String dateTime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy H:m");
+        this.dateTime = LocalDateTime.parse(dateTime, dtf);
+    }
+
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+
     public int getCalories() {
         return calories;
     }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
 
     public boolean isExcess() {
         return excess;
