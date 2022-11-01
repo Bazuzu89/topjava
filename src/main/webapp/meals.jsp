@@ -25,6 +25,7 @@ border-collapse: collapse;
 <h2>Meals</h2>
 <table>
     <tr>
+        <th>ID</th>
         <th>Date</th>
         <th>Description</th>
         <th>Calories</th>
@@ -33,16 +34,26 @@ border-collapse: collapse;
     </tr>
 
 <c:forEach items="${meals}" var="mealTo">
-    <tr>
+    <c:if test="${mealTo.excess eq true}" var="ifExcess" >
+    <tr style="color: red">
+        <td>${mealTo.id}</td>
         <td>${mealTo.dateTime}</td>
         <td>${mealTo.description}</td>
         <td>${mealTo.calories}</td>
-        <td>${"Update"}</td>
-        <td>${"Delete"}</td>
-<%--&lt;%&ndash;            <c:if test="${mealTo.excess eq true}" var="ifExcess" >&ndash;%&gt;--%>
-<%--&lt;%&ndash;            <c:out value="${mealTo.description}" />&ndash;%&gt;--%>
-<%--        </c:if>--%>
+        <td><a href="meals?action=update&id=${mealTo.id}">Update</a></td>
+        <td><a href="meals?action=delete&id=${mealTo.id}">Delete</a></td>
     </tr>
+    </c:if>
+    <c:if test="${mealTo.excess eq false}" var="ifExcess" >
+    <tr style="color:green">
+        <td>${mealTo.id}</td>
+        <td>${mealTo.dateTime}</td>
+        <td>${mealTo.description}</td>
+        <td>${mealTo.calories}</td>
+        <td><a href="meals?action=update&id=${mealTo.id}">Update</a></td>
+        <td><a href="meals?action=delete&id=${mealTo.id}">Delete</a></td>
+    </tr>
+    </c:if>
 </c:forEach>
 </table>
 </body>

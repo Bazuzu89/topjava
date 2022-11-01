@@ -55,7 +55,11 @@ public class MealsUtil {
     }
 
     public static Meal createEntity(MealTo mealTo) {
-        //TODO unwrap mealTo to meal logic
-        return null;
+        Meal meal = new Meal();
+        meal.setId(mealTo.getId());
+        meal.setDescription(mealTo.getDescription());
+        meal.setCalories(mealTo.getCalories());
+        meal.setDateTime(mealTo.getDateTime());
+        return meal;
     }
 }
